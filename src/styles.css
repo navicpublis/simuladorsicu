@@ -1,6 +1,25 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@theme {
+  --color-background: oklch(0.255 0.047 210);
+  --color-foreground: oklch(0.985 0.005 100);
+  --color-primary: oklch(0.795 0.202 125);
+  --color-primary-foreground: oklch(0.255 0.047 210);
+  --color-secondary: oklch(0.31 0.045 210);
+  --color-card: oklch(0.29 0.043 210);
+  --color-border: oklch(0.42 0.042 205);
+  --font-sans: 'Poppins', sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+}
+
 :root {
   --background: oklch(0.255 0.047 210);
   --foreground: oklch(0.985 0.005 160);
