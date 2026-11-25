@@ -1,6 +1,6 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
+
 @custom-variant dark (&:is(.dark *));
 @theme inline {
   --font-sans: 'Poppins', sans-serif;
@@ -22,7 +22,7 @@
   --color-input: var(--border);
   --color-ring: var(--primary);
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--foreground);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-header: var(--header);
   --color-header-foreground: var(--header-foreground);
   --color-stage: var(--stage);
@@ -30,6 +30,7 @@
   --radius-md: 8px;
   --radius-lg: 8px;
 }
+
 :root {
   --background: oklch(0.255 0.047 210);
   --foreground: oklch(0.985 0.005 160);
@@ -48,7 +49,12 @@
   --poster-overlay: linear-gradient(180deg, oklch(0.18 0.02 210 / 0) 37%, oklch(0.18 0.03 210 / 0.86) 100%);
   --page-shadow: 0 20px 70px oklch(0.12 0.025 210 / 0.18);
 }
-.dark { --background: oklch(0.255 0.047 210); --foreground: oklch(0.985 0.005 160); }
+
+.dark { 
+  --background: oklch(0.255 0.047 210); 
+  --foreground: oklch(0.985 0.005 160); 
+}
+
 @layer base {
   * { border-color: var(--border); letter-spacing: 0; }
   body { margin: 0; background: var(--stage); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
@@ -56,6 +62,7 @@
   button { touch-action: manipulation; }
   ::selection { background: var(--primary); color: var(--primary-foreground); }
 }
+
 .app-shell { max-width: 450px; margin: 0 auto; min-height: 100svh; background: var(--background); box-shadow: var(--page-shadow); position: relative; }
 .site-header { height: 77px; background: var(--header); color: var(--header-foreground); padding: 0 26px; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: flex; align-items: center; gap: 8px; font-size: 27px; font-weight: 700; }
@@ -141,10 +148,23 @@ progress::-moz-progress-bar { background: var(--primary); }
 .summary-row span { color: var(--muted-foreground); }
 .fee-block { padding: 23px 0 4px; }
 .fee-block strong { font-size: 28px; color: var(--primary); display: block; margin-top: 7px; }
+
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes slideIn { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes spin { to { transform: rotate(360deg); } }
-@media (max-width: 370px) { .journey-main, .step-panel { padding-left: 21px; padding-right: 21px; } .home-title { font-size: 27px; } .brand { font-size: 24px; } .site-header { padding: 0 21px; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 
-@media (max-width: 450px) { .journey-main { padding-top: 23px; } .home-title { font-size: 28px; margin-top: 14px; } .video-cover { width: 180px; margin-top: 18px; } .intro-tag { font-size: 9px; } }
+@media (max-width: 370px) { 
+  .journey-main, .step-panel { padding-left: 21px; padding-right: 21px; } 
+  .home-title { font-size: 27px; } 
+  .brand { font-size: 24px; } 
+  .site-header { padding: 0 21px; } 
+}
+@media (prefers-reduced-motion: reduce) { 
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } 
+}
+@media (max-width: 450px) { 
+  .journey-main { padding-top: 23px; } 
+  .home-title { font-size: 28px; margin-top: 14px; } 
+  .video-cover { width: 180px; margin-top: 18px; } 
+  .intro-tag { font-size: 9px; } 
+}
