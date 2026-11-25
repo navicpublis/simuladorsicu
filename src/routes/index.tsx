@@ -23,7 +23,7 @@ function VideoCover({ instruction = false, src = "/vsl-1.mp4" }: { instruction?:
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto my-6 rounded-2xl overflow-hidden shadow-2xl bg-black aspect-video group">
+    <div className="relative w-full max-w-md mx-auto my-6 rounded-2xl overflow-hidden shadow-2xl bg-black aspect-[9/16] group">
       <video 
         ref={videoRef}
         src={src} 
@@ -98,7 +98,7 @@ function CreditJourney() {
   }, [step]);
 
   function validate() {
-    if (document.replace(/\D/g, '').length !== 11) { setError('Digite os 11 números do documento de exemplo.'); return; }
+    if (document.replace(/\D/g, '').length !== 11) { setError('Digite os 11 números do seu documento.'); return; }
     setError(''); setValidating(true);
     setTimeout(() => { setValidating(false); setQuestionIndex(0); setAnswers([]); go(3); }, VALIDATION_DURATION_MS);
   }
@@ -128,7 +128,7 @@ function CreditJourney() {
       {/* Header */}
       <header className="w-full py-4 px-6 flex items-center justify-between bg-[#0a2533] border-b border-white/10">
         <div className="flex items-center gap-2">
-          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/500px-Logotipo_do_Sicoob.svg.png" alt="Sicoob" className="h-8" />
+           <img src="https://www.iloveimg.com/pt/download/ay98x1h2tmcn15fz76a57jpbws2zzl3vt8c2ca2zzbwfgqc1p9jsrc376avxm1spbps50r2wx2za8m7swgjwcbj26gpzc87fmcz1y2p3ll6l3ksrba8wvq73vzjs7ykg2l7s51zcj56mvghldqfrwhmxy5fwcwbqyrr380bvhmqz4rkzt51cvazgz1yppmc2cxkmk913j5css/6g" alt="Sicoob" className="h-8" />
         </div>
         <div className="text-right hidden sm:block">
           <p className="text-[10px] font-bold uppercase tracking-wider opacity-70">Crédito Cooperativo</p>
@@ -139,14 +139,14 @@ function CreditJourney() {
       {step === 1 ? (
         <section className="flex flex-col items-center justify-center px-6 py-12 text-center max-w-2xl mx-auto">
           <div className="flex items-center gap-2 text-[#d4ff00] text-[11px] font-bold uppercase tracking-widest mb-6">
-            <span className="w-2 h-2 bg-[#d4ff00] rounded-full animate-pulse" /> Seus planos merecem um novo começo
+            <span className="w-2 h-2 bg-[#d4ff00] rounded-full animate-pulse" /> Empréstimo para negativados
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
             Crédito para você.<br />
             <span className="text-[#d4ff00]">Possibilidades para<br />o seu futuro.</span>
           </h1>
           <p className="text-gray-300 text-lg mb-8 max-w-md">
-            Uma nova forma de olhar para seus planos. Simule seu crédito, no seu tempo e sem complicação.
+            Uma nova forma de olhar para seus planos. Simule seu crédito, sem complicação.
           </p>
           <VideoCover />
           <Button 
@@ -162,8 +162,8 @@ function CreditJourney() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-16 w-full border-t border-white/10 pt-8">
             {[
               { icon: <Clock3 />, title: "Rápido e simples", desc: "Do início ao próximo passo" },
-              { icon: <ShieldCheck />, title: "Você no controle", desc: "Sem compromisso" },
-              { icon: <Landmark />, title: "Feito para você", desc: "Escolha suas parcelas" },
+              { icon: <ShieldCheck />, title: "Garantia de 7 dias", desc: "Aprovação na hora" },
+              { icon: <Landmark />, title: "24H", desc: "Liberação média" },
             ].map((b, i) => (
               <div key={i} className="flex flex-col items-center p-4 text-center">
                 <div className="text-[#d4ff00] mb-2">{b.icon}</div>
@@ -228,7 +228,7 @@ function CreditJourney() {
               <div className="w-full h-1.5 bg-white/10 rounded-full mb-8 overflow-hidden">
                 <div className="h-full bg-[#d4ff00] transition-all duration-500" style={{ width: `${((questionIndex + 1) / questions.length) * 100}%` }} />
               </div>
-              <div className="text-[#d4ff00] text-xs font-bold uppercase tracking-wider mb-2">Pergunta {questionIndex + 1} de 5</div>
+               <div className="text-[#d4ff00] text-xs font-bold uppercase tracking-wider mb-2">Pergunta {questionIndex + 1} de 10</div>
               <h1 className="text-3xl font-bold leading-tight mb-2">{question.title}</h1>
               <p className="text-gray-300 mb-8">{question.hint}</p>
               
@@ -251,7 +251,7 @@ function CreditJourney() {
                 ))}
               </div>
               <div className="mt-8 flex items-center justify-center gap-2 text-xs text-gray-500">
-                <LockKeyhole size={14} /> Somente para esta simulação
+                <LockKeyhole size={14} /> Analisando seus dados para uma simulação mais precisa.
               </div>
             </div>
           )}
