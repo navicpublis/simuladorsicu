@@ -19,8 +19,6 @@ export const Route = createFileRoute('/')({
   component: CreditJourney,
 });
 
-
-
 function VideoCover({ instruction = false, src = "/vsl-1.mp4" }: { instruction?: boolean, src?: string }) {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -35,7 +33,7 @@ function VideoCover({ instruction = false, src = "/vsl-1.mp4" }: { instruction?:
   };
 
   return (
-    <div className="video-cover" style={{ position: 'relative', overflow: 'hidden', borderRadius: '24px', background: '#000', aspectRatio: '9/16' }}>
+    <div className="video-cover">
       <video 
         ref={videoRef}
         src={src} 
@@ -44,25 +42,11 @@ function VideoCover({ instruction = false, src = "/vsl-1.mp4" }: { instruction?:
         muted 
         playsInline 
         className="institutional-video" 
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
       />
 
       {!playing && (
-        <div className="video-overlay" style={{ 
-          position: 'absolute', 
-          top: 0, 
-          left: 0, 
-          width: '100%', 
-          height: '100%', 
-          display: 'flex', 
-          flexDirection: 'column', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
-          padding: '20px',
-          backgroundColor: 'rgba(0,0,0,0.3)',
-          zIndex: 10
-        }}>
-          <div className="video-topline" style={{ background: 'rgba(0,0,0,0.6)', color: 'white', padding: '4px 12px', borderRadius: '20px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+        <div className="video-overlay">
+          <div className="video-topline">
             <Play size={9} fill="white" /> {instruction ? 'ANTES DE CONTINUAR' : 'CRÉDITO COOPERATIVO'}
           </div>
 
@@ -72,9 +56,9 @@ function VideoCover({ instruction = false, src = "/vsl-1.mp4" }: { instruction?:
             </Button>
           </div>
 
-          <div className="video-caption" style={{ textAlign: 'center', color: 'white', marginBottom: '20px' }}>
-            <strong style={{ display: 'block', fontSize: '18px' }}>{instruction ? 'Seu próximo passo começa aqui' : 'Um novo começo para seus planos'}</strong>
-            <small style={{ opacity: 0.8 }}>Assista ao vídeo · 24 segundos</small>
+          <div className="video-caption">
+            <strong>{instruction ? 'Seu próximo passo começa aqui' : 'Um novo começo para seus planos'}</strong>
+            <small>Assista ao vídeo · 24 segundos</small>
           </div>
         </div>
       )}
@@ -172,7 +156,7 @@ function CreditJourney() {
     <div className="app-shell">
       <header className="site-header">
         <div className="brand" aria-label="Referênciavisual Sicoob">
-<img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/500px-Logotipo_do_Sicoob.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail" alt="Sicoob Logo" style={{ height: '20px', width: 'auto', objectFit: 'contain' }} />
+          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Logotipo_do_Sicoob.svg/500px-Logotipo_do_Sicoob.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail" alt="Sicoob Logo" className="brand-logo" />
           <span></span>
         </div>
         <div className="study-label">
@@ -262,7 +246,7 @@ function CreditJourney() {
   }[name];
   return (
     <Button type="button" key={name} variant="choice" className="bank-choice" data-selected={bank === name} aria-pressed={bank === name} onClick={() => setBank(name)}>
-      {logo ? <img src={logo} alt={name} style={{ width: '20px', height: '20px', objectFit: 'contain' }} /> : <Landmark />}
+      {logo ? <img src={logo} alt={name} className="bank-logo" /> : <Landmark />}
       {name}
     </Button>
   );
