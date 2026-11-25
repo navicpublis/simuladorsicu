@@ -9,6 +9,20 @@ export const Route = createFileRoute('/')({
   component: CreditJourney,
 });
 
+const BANK_LOGOS: Record<string, string | null> = {
+  'Sicoob': 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Marca-sicoob.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled',
+  'Nubank': 'https://www.abcdacomunicacao.com.br/wp-content/uploads/Nubank-Logo-750x375.png',
+  'Itaú': 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Ita%C3%BA_Unibanco_logo_2023.svg/500px-Ita%C3%BA_Unibanco_logo_2023.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail',
+  'Caixa': 'https://turismo.antoniocarlos.sc.gov.br/uploads/sites/36/2022/10/2606806.png',
+  'Inter': 'https://static.bancointer.com.br/blog/images/0234e7aa235244759b77f4f5c444fdbd_inter-logo.jpg',
+  'Bradesco': 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Banco_Bradesco_logo_%28vertical%29.png/960px-Banco_Bradesco_logo_%28vertical%29.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail',
+  'Santander': 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Santander_Logo.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled',
+  'Banco do Brasil': 'https://logopng.com.br/logos/banco-do-brasil-5.svg?dpl=dpl_83xWKUBiCCc88zqvgK1XNSG8JXgj',
+  'Picpay': 'https://www.lancerural.com.br/wp-content/uploads/2020/04/picpay-logo-1-300x225.jpg',
+  'Mercado Pago': 'https://logo-teka.com/wp-content/uploads/2026/05/mercado-pago-vertical-logo.png',
+  'Outro': null
+};
+
 function VideoCover({ instruction = false, src = "/vsl-1.mp4" }: { instruction?: boolean, src?: string }) {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -98,7 +112,7 @@ function CreditJourney() {
   }, [step]);
 
   function validate() {
-    if (document.replace(/\D/g, '').length !== 11) { setError('Digite os 11 números do seu documento.'); return; }
+    if (document.replace(/\D/g, '').length !== 11) { setError('Digite os 11 números do documento de exemplo.'); return; }
     setError(''); setValidating(true);
     setTimeout(() => { setValidating(false); setQuestionIndex(0); setAnswers([]); go(3); }, VALIDATION_DURATION_MS);
   }
@@ -128,7 +142,7 @@ function CreditJourney() {
       {/* Header */}
       <header className="w-full py-4 px-6 flex items-center justify-between bg-[#0a2533] border-b border-white/10">
         <div className="flex items-center gap-2">
-           <img src="https://www.iloveimg.com/pt/download/ay98x1h2tmcn15fz76a57jpbws2zzl3vt8c2ca2zzbwfgqc1p9jsrc376avxm1spbps50r2wx2za8m7swgjwcbj26gpzc87fmcz1y2p3ll6l3ksrba8wvq73vzjs7ykg2l7s51zcj56mvghldqfrwhmxy5fwcwbqyrr380bvhmqz4rkzt51cvazgz1yppmc2cxkmk913j5css/6g" alt="Sicoob" className="h-8" />
+            <img src="/sicoob.png" alt="Sicoob" className="h-8" />
         </div>
         <div className="text-right hidden sm:block">
           <p className="text-[10px] font-bold uppercase tracking-wider opacity-70">Crédito Cooperativo</p>
@@ -139,14 +153,14 @@ function CreditJourney() {
       {step === 1 ? (
         <section className="flex flex-col items-center justify-center px-6 py-12 text-center max-w-2xl mx-auto">
           <div className="flex items-center gap-2 text-[#d4ff00] text-[11px] font-bold uppercase tracking-widest mb-6">
-            <span className="w-2 h-2 bg-[#d4ff00] rounded-full animate-pulse" /> Empréstimo para negativados
+            <span className="w-2 h-2 bg-[#d4ff00] rounded-full animate-pulse" /> Seus planos merecem um novo começo
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
             Crédito para você.<br />
             <span className="text-[#d4ff00]">Possibilidades para<br />o seu futuro.</span>
           </h1>
           <p className="text-gray-300 text-lg mb-8 max-w-md">
-            Uma nova forma de olhar para seus planos. Simule seu crédito, sem complicação.
+            Uma nova forma de olhar para seus planos. Simule seu crédito sem complicação.
           </p>
           <VideoCover />
           <Button 
@@ -162,8 +176,8 @@ function CreditJourney() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-16 w-full border-t border-white/10 pt-8">
             {[
               { icon: <Clock3 />, title: "Rápido e simples", desc: "Do início ao próximo passo" },
-              { icon: <ShieldCheck />, title: "Garantia de 7 dias", desc: "Aprovação na hora" },
-              { icon: <Landmark />, title: "24H", desc: "Liberação média" },
+              { icon: <ShieldCheck />, title: "Você no controle", desc: "Sem compromisso" },
+              { icon: <Landmark />, title: "Feito para você", desc: "Escolha suas parcelas" },
             ].map((b, i) => (
               <div key={i} className="flex flex-col items-center p-4 text-center">
                 <div className="text-[#d4ff00] mb-2">{b.icon}</div>
@@ -251,7 +265,7 @@ function CreditJourney() {
                 ))}
               </div>
               <div className="mt-8 flex items-center justify-center gap-2 text-xs text-gray-500">
-                <LockKeyhole size={14} /> Analisando seus dados para uma simulação mais precisa.
+                <LockKeyhole size={14} /> Somente para esta simulação
               </div>
             </div>
           )}
@@ -326,18 +340,22 @@ function CreditJourney() {
               
               <form onSubmit={e => { e.preventDefault(); if (!bank || !agency || !account) { setError('Preencha todos os campos.'); return; } go(7); }} className="space-y-6">
                 <div className="grid grid-cols-3 gap-2">
-                  {['Sicoob', 'Nubank', 'Itaú', 'Caixa', 'Inter', 'Bradesco', 'Santander', 'Banco do Brasil', 'Picpay', 'Mercado Pago', 'Outro'].map(name => (
-                    <button 
-                      key={name} 
-                      type="button" 
-                      onClick={() => setBank(name)}
-                      className={`p-2 rounded-lg border text-[10px] font-bold transition-all flex flex-col items-center justify-center gap-2 aspect-square ${bank === name ? 'bg-[#d4ff00] text-black border-[#d4ff00]' : 'bg-white/5 border-white/10 text-white hover:bg-white/10'}`}
-                    >
-                      <Landmark size={16} /> {name}
-                    </button>
-                  ))}
+                    {Object.keys(BANK_LOGOS).map(name => (
+                      <button 
+                        key={name} 
+                        type="button" 
+                        onClick={() => setBank(name)}
+                        className={`p-2 rounded-lg border text-[10px] font-bold transition-all flex flex-col items-center justify-center gap-2 aspect-square ${bank === name ? 'bg-[#d4ff00] text-black border-[#d4ff00]' : 'bg-white/5 border-white/10 text-white hover:bg-white/10'}`}
+                      >
+                        {BANK_LOGOS[name] ? (
+                          <img src={BANK_LOGOS[name]!} alt={name} className="w-8 h-8 object-contain" />
+                        ) : (
+                          <Landmark size={16} />
+                        )}
+                        {name}
+                      </button>
+                    ))}
                 </div>
-                
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-xs text-gray-400">Agência</label>
